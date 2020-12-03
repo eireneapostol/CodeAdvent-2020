@@ -27,9 +27,6 @@ for line in f:
 width = len(puzzle[1])
 total_lines = line_nr
 
-line_nr = 2
-pos = 3
-count = 0
 multiplication = 1
 
 slopes = [[1, 1], [3, 1], [5, 1], [7, 1], [1, 2]]
