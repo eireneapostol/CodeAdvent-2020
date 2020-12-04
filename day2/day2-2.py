@@ -28,5 +28,4 @@ for line in f:
     if (string[pos1-1] == character) != (string[pos2-1] == character):
         count += 1
 
-
 print(count)
