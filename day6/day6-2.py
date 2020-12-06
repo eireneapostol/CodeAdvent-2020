@@ -47,11 +47,9 @@ def common(lines):
     str1 = lines[0]
     dict1 = Counter(str1)
     common_dict = dict1
-    i = 1
-    while i < len(lines):
-        dict2 = Counter(lines[i])
+    for i in lines[1:]:
+        dict2 = Counter(i)
         common_dict = common_dict & dict2
-        i += 1
 
     common_ch = list(common_dict.elements())
     return len(common_ch)
