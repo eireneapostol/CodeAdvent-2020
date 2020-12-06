@@ -39,34 +39,27 @@ For each group, count the number of questions to which everyone answered "yes". 
 from collections import Counter
 
 f = open("../inputs/day6", "r")
+file_content = f.read()
+groups = file_content.split("\n\n")
 
 
-def common(str1, str2):
+def common(lines):
+    str1 = lines[0]
     dict1 = Counter(str1)
-    dict2 = Counter(str2)
-    common_dict = dict1 & dict2
+    common_dict = dict1
+    i = 1
+    while i < len(lines):
+        dict2 = Counter(lines[i])
+        common_dict = common_dict & dict2
+        i += 1
+
     common_ch = list(common_dict.elements())
-    return ''.join(common_ch)
+    return len(common_ch)
 
 
 total = 0
-next_line = f.readline()
-common_chars = 0
-common_str = common(next_line.split("\n")[0], next_line.split("\n")[0])
-next_line = f.readline()
+for group in groups:
+    lines = group.split("\n")
+    total += common(lines)
 
-while next_line != "":
-    if next_line == "\n":
-        total += len(common_str)
-        next_line = f.readline()
-        if next_line != "":
-            common_str = common(next_line, next_line)
-        else:
-            break
-    else:
-        next_line = next_line.split("\n")[0]
-        common_str = common(common_str, next_line)
-        next_line = f.readline()
-
-total += len(common_str)
 print(total)
