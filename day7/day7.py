@@ -71,15 +71,14 @@ def count_parents(parents):
             count_parents(bags[parent]["parents"])
 
 
-def count_children(children):
-    count = 0
-    for child in children:
-        key = ' '.join(child.split()[1:])
-        if bags[key]["children"]:
-            count += int(child.split()[0]) * count_children(bags[key]["children"])
+def count_children(parent):
+    count = 1
+    for child in bags[' '.join(parent.split()[1:])]["children"]:
+        if bags[' '.join(child.split()[1:])]["children"]:
+            count += int(child.split()[0]) * count_children(child)
         else:
             count += int(child.split()[0])
-
+    print(parent, count)
     return count
 
 
@@ -102,13 +101,8 @@ for line in f:
 print(bags)
 colors = []
 parents = bags["shiny gold"]["parents"]
-children = ["1 shiny gold"]
+children = "1 shiny gold"
 count_parents(parents)
 number_of_children = count_children(children)
 print(len(set(colors)))
-print(number_of_children)
-
-
-
-
-
+print(number_of_children - 1)
